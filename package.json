@@ -1,7 +1,7 @@
 {
   "name": "how-much-longer",
   "version": "0.1.0",
-  "homepage": "http://how-much-longer.today",
+  "homepage": "http://howmuchlonger.today",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
