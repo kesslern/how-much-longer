@@ -1,72 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
+import TrumpCountdown from './TrumpCountdown';
+import YearCountdown from './YearCountdown';
 import './App.css';
 
-const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December", "January"
-];
-
-function daysInYear(year) {
-  return isLeapYear(year) ? 366 : 365;
-}
-
-function isLeapYear(year) {
-  return year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0);
-}
-
-function useInterval(callback, delay) {
-  const savedCallback = useRef();
-
-  // Remember the latest callback.
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
-
-  // Set up the interval.
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-    if (delay !== null) {
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
-}
-
 function App() {
-  const [date, setDate] = useState(new Date());
+  const [tab, setTab] = useState(0);
 
-  useInterval(() => {
-    setDate(new Date());
-  }, 1000)
-
-  const hoursInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate() * 24;
-  const nextMonth = new Date(date.getFullYear(), date.getMonth() + 1, 1);
-  const monthStart = new Date(date.getFullYear(), date.getMonth(), 1).getTime();
-  const now = date.getTime();
-  const hoursCompleted = (now - monthStart) / 1000 / 60 / 60;
-  const hoursLeft = hoursInMonth - hoursCompleted;
-  const hoursPercent = hoursCompleted / hoursInMonth * 100;
-  const daysIntoYear = Math.ceil((date - new Date(date.getFullYear(), 0, 1)) / 86400000);
-  const daysLeft = daysInYear(date.getFullYear()) - daysIntoYear;
-  const daysPercent = daysIntoYear / daysInYear(date.getFullYear()) * 100;
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          It's {monthNames[date.getMonth()]}. {hoursLeft.toFixed(2)} hours until {monthNames[nextMonth.getMonth()]}.
-           <br />
-          {hoursPercent.toFixed(2)}% through the month.
-        </p>
-        <p>
-          {daysLeft} days left in {date.getFullYear()}.
-          <br />
-          {daysPercent.toFixed(2)}% through the year.
-        </p>
-      </header>
+  return <div className="app">
+    <div className="buttons">
+      <button className={tab === 0 ? "selected" : ""} onClick={() => setTab(0)}>The End of Trump's Presidency</button>
+      <button className={tab === 1 ? "selected" : ""} onClick={() => setTab(1)}>The End of 2020</button>
     </div>
-  );
+    {tab === 0 && <TrumpCountdown />}
+    {tab === 1 && <YearCountdown />}
+  </div>;
 }
 
 export default App;
