@@ -51,7 +51,7 @@ function YearCountdown() {
   const daysPercent = daysIntoYear / daysInYear(date.getFullYear()) * 100;
 
   return (
-    <div className="content">
+    <>
       <p>
         It's {monthNames[date.getMonth()]}. {hoursLeft.toFixed(2)} hours until {monthNames[nextMonth.getMonth()]}.
            <br />
@@ -62,7 +62,7 @@ function YearCountdown() {
           <br />
         {daysPercent.toFixed(2)}% through the year.
         </p>
-    </div>
+    </>
   );
 }
 
