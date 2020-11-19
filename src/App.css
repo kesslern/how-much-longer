@@ -33,6 +33,10 @@ body {
   color: white;
 }
 
+content {
+  margin: 16px;
+}
+
 .buttons {
   display: flex;
 }

@@ -11,8 +11,10 @@ function App() {
       <button className={tab === 0 ? "selected" : ""} onClick={() => setTab(0)}>The End of Trump's Presidency</button>
       <button className={tab === 1 ? "selected" : ""} onClick={() => setTab(1)}>The End of 2020</button>
     </div>
-    {tab === 0 && <TrumpCountdown />}
-    {tab === 1 && <YearCountdown />}
+    <div className="content">
+      {tab === 0 && <TrumpCountdown />}
+      {tab === 1 && <YearCountdown />}
+    </div>
   </div>;
 }
 
